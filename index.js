@@ -37,9 +37,9 @@ app.post('/api/insert', (req, res) => {
         con.insert(data.id,"","","","",data.data_inclusao,data.dados,data.tempo_venc,"")
         
         // Exemplo de resposta
-        res.status(200).json({ mensagem: 'Requisição recebida com sucesso!', data:data });
+        res.status(200).json({ mensagem: 'Requisição recebida com sucesso!', status:'Y' });
     } catch (error) {
-        res.status(400).json({ erro: 'Erro ao processar os dados recebidos.' });
+        res.status(400).json({ erro: 'Erro ao processar os dados recebidos.', status:'N' });
     }
 
     /*if (rec) {
