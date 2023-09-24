@@ -41,4 +41,21 @@ async function update(id, parametro) {
     }
 }
 
-module.exports = { insert, select, update }
+async function delet(id) {
+    const qtd_digitos = id.length;
+
+    if(qtd_digitos >5){
+        ret = await con.agenda.deleteMany({ _id: id })
+        console.log("Delete App: " +ret)
+    }else{
+        var ret = await con.agenda.deleteMany({ id: id })
+        console.log("Delete: Excel: " + ret)
+        if (ret.length > 0) {
+    
+        }
+    }
+
+
+}
+
+module.exports = { insert, select, update, delet }
