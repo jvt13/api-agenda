@@ -1,6 +1,7 @@
 const con = require('./conexao');
 
 async function insert(id_, ano_, mes_, dta_venc, sem_venc, dta_incl, dados_, tempo, status) {
+    //console.log("Data: " +ano_ +" "+ mes_)
     await con.agenda.create({
         id: id_,
         ano: ano_,
@@ -11,7 +12,7 @@ async function insert(id_, ano_, mes_, dta_venc, sem_venc, dta_incl, dados_, tem
         dados: dados_,
         tempo_dias: tempo,
         status: status
-    });
+});
 }
 
 async function select() {
@@ -22,6 +23,11 @@ async function select() {
         return ret;
     }
     return 0;
+}
+
+async function baixa(){
+    
+    //const ret = await con.con
 }
 
 async function update(id, parametro) {
@@ -54,8 +60,20 @@ async function delet(id) {
     
         }
     }
-
-
 }
 
-module.exports = { insert, select, update, delet }
+async function insertBaixa(id_, ano_, mes_, dta_venc, sem_venc, dta_incl, dados_, tempo, status) {
+    await con.baixa.create({
+        id: id_,
+        ano: ano_,
+        mes: mes_,
+        dta_vencimento: dta_venc,
+        sem_vencimento: sem_venc,
+        dta_inclusao: dta_incl,
+        dados: dados_,
+        tempo_dias: tempo,
+        status: status
+    });
+}
+
+module.exports = { insert, select, update, delet, insertBaixa}

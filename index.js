@@ -30,9 +30,9 @@ app.post('/api/insert', (req, res) => {
 
         // Aqui você pode processar os dados recebidos
         console.log('Dados recebidos:', data);
-        console.log(data.nome)
+        console.log(data.dta_inclusao)
 
-        con.insert(data.id, "", "", "", "", data.data_inclusao, data.dados, data.tempo_venc, "")
+        con.insert(data.id, data.ano, data.mes, data.dta_vencimento, data.dia_semana, data.dta_inclusao, data.dados, data.tempo_venc, "")
 
         // Exemplo de resposta
         res.status(200).json({ mensagem: 'Requisição recebida com sucesso!', status: 'Y' });
@@ -49,11 +49,24 @@ app.post('/api/delete', async (req, res) => {
         con.delet(data.id);
         const list = await con.select();
 
-        res.status(200).json({ mensagem: 'Requisição recebida com sucesso!',status:"Y", list: list });
+        res.status(200).json({ mensagem: 'Requisição recebida com sucesso!', status: "Y", list: list });
     } catch (error) {
         res.status(400).json({ erro: 'Erro ao processar os dados recebidos.', status: 'N' });
     }
-})
+});
+
+app.post('/api/baixa', async (req, res) => {
+    try {
+        const data = req.body; // Os dados enviados estão em req.body
+        console.log('Dados recebidos:', data);
+        
+        con.insertBaixa(data.id, "", "", "", "", data.data_inclusao, data.dados, data.tempo_venc, "")
+        
+        res.status(200).json({ mensagem: 'Requisição recebida com sucesso!', status: "Y", list: list });
+    } catch (error) {
+        res.status(400).json({ erro: 'Erro ao processar os dados recebidos.', status: 'N' });
+    }
+});
 
 app.get('/api/consulta-list', async (req, res) => {
 

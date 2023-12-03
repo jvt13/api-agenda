@@ -27,5 +27,20 @@ table = new Schema({
 
 var agenda = mongoose.model("agenda", table);
 
+table = new Schema({
+    id: String,
+    ano: String,
+    mes: String,
+    dta_vencimento: String,
+    sem_vencimento: String,
+    dta_inclusao: String,
+    dados: String,
+    tempo_dias: String,
+    status: String,
+    dta_baixa: String
+},{collection:'concluidos'});
 
-module.exports = { mongoose, agenda };
+var baixa = mongoose.model("concluidos", table);
+
+
+module.exports = { mongoose, agenda, baixa };
