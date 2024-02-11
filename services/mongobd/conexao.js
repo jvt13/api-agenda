@@ -42,5 +42,10 @@ table = new Schema({
 
 var baixa = mongoose.model("concluidos", table);
 
+table = new Schema({
+    id: String
+},{collection:'check_update'});
 
-module.exports = { mongoose, agenda, baixa };
+var check_update = mongoose.model("check_update", table);
+
+module.exports = { mongoose, agenda, baixa, check_update };

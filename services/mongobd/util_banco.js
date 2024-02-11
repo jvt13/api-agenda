@@ -76,4 +76,29 @@ async function insertBaixa(id_, ano_, mes_, dta_venc, sem_venc, dta_incl, dados_
     });
 }
 
-module.exports = { insert, select, update, delet, insertBaixa}
+async function selectCheckUpdate(){
+    const ret = await con.check_update.find();
+//console.log(ret)
+    if(ret){
+        return ret;
+    }
+    return 0;
+}
+
+async function insertCheckUpdate(id_){
+    await con.check_update.create({
+        id: id_
+    });
+}
+
+async function updateCheckUpdate(id_){
+    const filter = {}
+    const query = {id: id_}
+
+    const ret = await con.check_update.findOneAndUpdate(filter, query, { new: true });
+    if (ret.length > 0) {
+        console.log("check_update");
+    }
+};
+
+module.exports = { insert, select, update, delet, insertBaixa, updateCheckUpdate, selectCheckUpdate}
