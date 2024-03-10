@@ -42,7 +42,7 @@ app.post('/api/insert', async (req, res) => {
                 id: val.id
             }
         });
-        console.log(list_id[0].id)
+        console.log("ID: " + list_id[0].id)
         const data = req.body; // Os dados enviados estão em req.body
 
         // Aqui você pode processar os dados recebidos
@@ -51,7 +51,8 @@ app.post('/api/insert', async (req, res) => {
 
         con.insert(list_id[0].id, data.ano, data.mes, data.dta_vencimento, data.sem_vencimento, data.dta_inclusao, data.dados, data.tempo_venc, "")
 
-        con.updateCheckUpdate(data.id);
+        console.log("ID2: ", data.id)
+        con.updateCheckUpdate(data.id); 
 
         // Exemplo de resposta
         res.status(200).json({ mensagem: 'Requisição recebida com sucesso!', status: 'Y' });
@@ -65,8 +66,11 @@ app.post('/api/delete', async (req, res) => {
         const data = req.body;
         console.log(data.id);
 
-        con.delet(data.id);
+        //con.delet(data.id);
         const list = await con.select();
+
+        //console.log("ID update: "+ data.id_check);
+        con.updateCheckUpdate(data.id_check);
 
         res.status(200).json({ mensagem: 'Requisição recebida com sucesso!', status: "Y", list: list });
     } catch (error) {
